@@ -64,7 +64,7 @@ public class Product {
 		if (attribute == "price") {
 			conversion= String.format("%3.2f", price);
 		} else {
-			conversion= String.format("%3f", stock);
+			conversion= Integer.toString(stock);
 		}
 		return conversion;
 	}
