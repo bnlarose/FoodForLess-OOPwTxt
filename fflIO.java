@@ -56,10 +56,9 @@ public class fflIO {
      * @param  products    an ArrayList containing all the products that comprise the inventory
      * @throws IOException Required declaration of IOException. If the file doesn't exist, it's created; the exception isn't actually thrown
      */
-    public static void updateStockFile(ArrayList<Product> products)throws IOException{
-        String file = "stock3.txt";
+    public static void updateStockFile(ArrayList<Product> products, String fileName)throws IOException{
         String line, code, label, count, cost= "";
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
         for (int i=0; i<products.size(); i++){
             code= products.get(i).giveProdCode()+" ";
             label= products.get(i).giveDescription()+" ";
