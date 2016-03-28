@@ -13,7 +13,7 @@ import java.lang.*;
 *@version 2.0
 */
 public class fflv2 {
-	public static void main (String[] args) throws FileNotFoundException {
+	public static void main (String[] args) throws FileNotFoundException, IOException, NumberFormatException {
         ArrayList<Product> products = new ArrayList<Product>();
 		/*Product cheese = new Product ("Ch33Z", "Cheese", 20, 12.50);
         products.add(cheese);
@@ -29,6 +29,7 @@ public class fflv2 {
             System.out.printf(products.get(i).giveDescription()+"%n");
         }*/
         greeting();
+        pickOption(products);
 	}
 
     public static ArrayList<Product> getProducts (ArrayList<Product> products) throws FileNotFoundException {
@@ -59,5 +60,35 @@ public class fflv2 {
     public static void giveOptions(){
         ArrayList<String> prompt= new ArrayList<String>(Arrays.asList("%nKindly select an option from the list below:%n", "1. Display current stock levels and values%n", "2. Display all out of stock items%n", "3. Display total value of current stock%n", "4. Identify most expensive food item%n", "5. Create an order from current inventory%n"));
         fflIO.printOutput(1, prompt);
+    }
+
+    public static void pickOption(ArrayList<Product> products) throws InputMismatchException, IOException, NumberFormatException{
+        int option = 0;
+        giveOptions();        
+        while (option<1 || option>6){
+            String response= fflIO.getUserInput("Which would you like to do?: ");
+            try{
+                option = Integer.valueOf(response);
+            }catch (InputMismatchException|NumberFormatException e){
+                ArrayList<String> badInput= new ArrayList<String>(Arrays.asList("That's definitely not an option on the list.%n"));
+                fflIO.printOutput(1, badInput);
+                pickOption(products);
+            }            
+        }
+        System.out.println(option);
+        /*switch(option){
+            case 1: giveStock(1, productCodeArray, descriptionArray, stockArray, priceArray, size, ordProdCode, ordQuant, ordValue, changes, test_mode);
+                break;
+            case 2: getWhatsOut(productCodeArray, descriptionArray, stockArray, priceArray, size, ordProdCode, ordQuant, ordValue, changes, test_mode);
+                break;
+            case 3: getTotalValue(1, productCodeArray, descriptionArray, stockArray, priceArray, size, ordProdCode, ordQuant, ordValue, changes, test_mode);
+                break;
+            case 4: getMostExpensive(productCodeArray, descriptionArray, stockArray, priceArray, size, ordProdCode, ordQuant, ordValue, changes, test_mode);
+                break;
+            case 5: getOrderSize(productCodeArray, descriptionArray, stockArray, priceArray, size, ordProdCode, ordQuant, ordValue, changes, test_mode);
+                break;
+            default: pickOption(productCodeArray, descriptionArray, stockArray, priceArray, size, ordProdCode, ordQuant, ordValue, changes, test_mode);
+                break;
+        }             */         
     }
 }
