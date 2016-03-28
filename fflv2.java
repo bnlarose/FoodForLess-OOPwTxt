@@ -25,9 +25,10 @@ public class fflv2 {
             System.out.printf("We have %s for $%s%n", name, price);
         }*/
         getProducts(products);
-        for (int i=0; i<products.size(); i++){
+        /*for (int i=0; i<products.size(); i++){
             System.out.printf(products.get(i).giveDescription()+"%n");
-        }
+        }*/
+        greeting();
 	}
 
     public static ArrayList<Product> getProducts (ArrayList<Product> products) throws FileNotFoundException {
@@ -42,6 +43,14 @@ public class fflv2 {
             }
         }
         return products;
+    }
+
+    /**
+    * Displays a greeting message, identifying the company
+    */ 
+    public static void greeting(){
+        ArrayList<String> greetings1= new ArrayList<String>(Arrays.asList("%50s%n", "Welcome to Foods for Less Grocery.", "%56s%n%n", "Proudly serving Point Fortin for over 40 years."));
+        fflIO.printOutput(2,greetings1);    
     }
 
 }
