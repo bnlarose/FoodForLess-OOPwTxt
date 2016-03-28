@@ -91,4 +91,20 @@ public class fflv2 {
                 break;
         }             */         
     }
+
+    public static void getAnother(ArrayList<Product> products) throws IOException{
+        String response = "";
+        response = fflIO.getUserInput("%nWould you like to perform another operation? [Yes/No]: ");
+        switch (response.toLowerCase()){
+            case "y": case "yes": pickOption(products);
+                break;
+            case "n": case "no": ArrayList<String> farewell= new ArrayList<String>(Arrays.asList("Goodbye!\n"));
+                fflIO.printOutput(1, farewell);
+                fflIO.updateStockFile(products, "stock3.txt");
+                break;
+            default: ArrayList<String> valid= new ArrayList<String>(Arrays.asList("Please enter a valid response.\n"));
+                fflIO.printOutput(1, valid);
+                getAnother(products);
+        }
+    }
 }
