@@ -70,9 +70,9 @@ public class fflv2 {
                 break;
             case 2: getWhatsOut(products, sales, changes);
                 break;
-            /*case 3: getTotalValue(1, productCodeArray, descriptionArray, stockArray, priceArray, size, ordProdCode, ordQuant, ordValue, changes, test_mode);
+            case 3: getTotalValue(1, products, sales, changes);
                 break;
-            case 4: getMostExpensive(productCodeArray, descriptionArray, stockArray, priceArray, size, ordProdCode, ordQuant, ordValue, changes, test_mode);
+            /*case 4: getMostExpensive(productCodeArray, descriptionArray, stockArray, priceArray, size, ordProdCode, ordQuant, ordValue, changes, test_mode);
                 break;
             case 5: getOrderSize(productCodeArray, descriptionArray, stockArray, priceArray, size, ordProdCode, ordQuant, ordValue, changes, test_mode);
                 break;*/
@@ -142,6 +142,28 @@ public class fflv2 {
                     fflIO.printOutput(2, out);
                 }
             }
+        } catch (IndexOutOfBoundsException iooex){
+            ArrayList<String> notThere= new ArrayList<String>(Arrays.asList("%n%s%n", "Something went wrong. Please check the input."));
+            fflIO.printOutput(2, notThere);
+        }
+    }
+
+    public static void getTotalValue(int option, ArrayList<Product> products, ArrayList<Product> sales, boolean changes) throws IOException{
+        try{
+            double count = 0;
+            if (option == 1){
+                for (int i=0; i<products.size(); i++){
+                    count+=products.get(i).giveTotalValue();
+                }
+                ArrayList<String> total= new ArrayList<String>(Arrays.asList("%nThe total value of the current stock is $%s%n", String.format("%4.2f", count)));
+                fflIO.printOutput(2, total);
+            }/*else{
+                for (int j=0; j<ordQuant.size(); j++){
+                    count+=(ordQuant.get(j)*priceArray.get(productCodeArray.indexOf(ordProdCode.get(j))));
+                }
+                ordValue= count;
+                giveStock(2, productCodeArray, descriptionArray, stockArray, priceArray, size, ordProdCode, ordQuant, ordValue, changes, test_mode);
+            }*/
         } catch (IndexOutOfBoundsException iooex){
             ArrayList<String> notThere= new ArrayList<String>(Arrays.asList("%n%s%n", "Something went wrong. Please check the input."));
             fflIO.printOutput(2, notThere);
