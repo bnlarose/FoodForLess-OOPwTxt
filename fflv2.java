@@ -81,9 +81,9 @@ public class fflv2 {
         switch(option){
             case 1: giveStock(1, products, sales, changes);
                 break;
-            /*case 2: getWhatsOut(productCodeArray, descriptionArray, stockArray, priceArray, size, ordProdCode, ordQuant, ordValue, changes, test_mode);
+            case 2: getWhatsOut(products, sales, changes);
                 break;
-            case 3: getTotalValue(1, productCodeArray, descriptionArray, stockArray, priceArray, size, ordProdCode, ordQuant, ordValue, changes, test_mode);
+            /*case 3: getTotalValue(1, productCodeArray, descriptionArray, stockArray, priceArray, size, ordProdCode, ordQuant, ordValue, changes, test_mode);
                 break;
             case 4: getMostExpensive(productCodeArray, descriptionArray, stockArray, priceArray, size, ordProdCode, ordQuant, ordValue, changes, test_mode);
                 break;
@@ -142,5 +142,22 @@ public class fflv2 {
             sales.clear();
             getAnother(products, sales, changes);
         }*/
+    }
+
+    public static void getWhatsOut(ArrayList<Product> products, ArrayList<Product> sales, boolean changes)throws IOException, IndexOutOfBoundsException{
+        ArrayList<String> header= new ArrayList<String>(Arrays.asList("%n***********OUT OF STOCK ITEMS***********%n"));
+        fflIO.printOutput(1, header);
+        try{
+            for (int i=0; i<products.size(); i++){
+                if (products.get(i).giveStock()==0){
+                    String item = products.get(i).giveDescription();
+                    ArrayList<String> out = new ArrayList<String>(Arrays.asList("%s%n", item));
+                    fflIO.printOutput(2, out);
+                }
+            }
+        } catch (IndexOutOfBoundsException iooex){
+            ArrayList<String> notThere= new ArrayList<String>(Arrays.asList("%n%s%n", "Something went wrong. Please check the input."));
+            fflIO.printOutput(2, notThere);
+        }
     }
 }
