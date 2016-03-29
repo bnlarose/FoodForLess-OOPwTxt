@@ -17,19 +17,7 @@ public class fflv2 {
         ArrayList<Product> products = new ArrayList<Product>();
         ArrayList<Product> sales = new ArrayList<Product>();
         boolean changes = false;
-		/*Product cheese = new Product ("Ch33Z", "Cheese", 20, 12.50);
-        products.add(cheese);
-        Product milk = new Product ("M101", "Milk", 50, 14.00);
-        products.add(milk);
-        for (int i=0; i<products.size(); i++){
-            String name = products.get(i).giveDescription();
-            String price = products.get(i).giveAsString("price");
-            System.out.printf("We have %s for $%s%n", name, price);
-        }*/
-        getProducts(products);
-        /*for (int i=0; i<products.size(); i++){
-            System.out.printf(products.get(i).giveDescription()+"%n");
-        }*/
+		getProducts(products);
         greeting();
         pickOption(products, sales, changes);
 	}
@@ -77,7 +65,6 @@ public class fflv2 {
                 pickOption(products, sales, changes);
             }            
         }
-        System.out.println(option);
         switch(option){
             case 1: giveStock(1, products, sales, changes);
                 break;
